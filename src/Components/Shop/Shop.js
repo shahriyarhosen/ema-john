@@ -10,12 +10,18 @@ const Shop = () => {
       .then(res => res.json())
       .then(data => setProducts(data))
     }, [])
+
+    const addToCart = (product) => {  
+        console.log(product);
+    }
+    
     return (
         <section className='shop-container'>
             <div className='products-container'>
                 {
                     products.map((product) => <Product 
                     product={product}
+                    addToCart={addToCart}
                     key={product.id}
                     ></Product>)
                 }
