@@ -53,8 +53,15 @@
   border-radius: 0px 0px 8px 8px;
   font-weight: 400;
   font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.cart-btn:hover{
-    background: orange;
+.cart-btn p {
+  margin-right: 5px;
+}
+
+.cart-btn:hover {
+  background: orange;
 }
