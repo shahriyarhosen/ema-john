@@ -14,10 +14,21 @@ const Shop = () => {
       .then(data => setProducts(data))
     }, [])
 
-    const addToCart = (setProduct) => {  
-        const newCart = [...cart, setProduct];
+    const addToCart = (selectedProduct) => {  
+        console.log(selectedProduct);
+        let newCart = [];
+        const exists = cart.find((product) => product.id === selectedProduct);
+        if (!exists) {
+            selectedProduct.quantity =  1
+            newCart = [...cart, selectedProduct];
+        }
+        else{
+            const rest = cart.filter((product) =>  product.id !== selectedProduct);
+            exists.quantity = selectedProduct.quantity + 1
+            newCart = [...rest, exists]
+        }
         setCart(newCart)
-        addToDb(setProduct.id)
+        addToDb(selectedProduct.id)
     }
 
     useEffect(() => {
@@ -30,7 +41,6 @@ const Shop = () => {
               addedProduct.quantity = quantity
             saveCart.push(addedProduct)
           }
-
       }
       setCart(saveCart);
     }, [products])
