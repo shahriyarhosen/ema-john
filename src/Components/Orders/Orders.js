@@ -1,13 +1,21 @@
-import React from 'react';
-import useProducts from '../../hook/useProducts';
+import React from "react";
+import useCart from "../../hook/useCart";
+import useProducts from "../../hook/useProducts";
+import Cart from "../Cart/Cart";
 
 const Orders = () => {
-    const [products] = useProducts([])
-    return (
-        <div>
-            <h1>This is Orders: {products.length}</h1>
-        </div>
-    );
+  const [products] = useProducts([]);
+  const [cart] = useCart(products);
+  return (
+    <div className="shop-container">
+      <div className="products-container">
+          
+      </div>
+      <div className="cart-container">
+        <Cart cart={cart}></Cart>
+      </div>
+    </div>
+  );
 };
 
 export default Orders;

@@ -3,9 +3,9 @@ import { getStoreCart } from "../utilities/fakedb";
 
 const useCart = (products) => {
   const [cart, setCart] = useState([]);
-  let saveCart = [];
   useEffect(() => {
     const storeCart = getStoreCart();
+    let saveCart = [];
     for (const id in storeCart) {
       const addProduct = products.find((pd) => pd.id === id);
       if (addProduct) {
