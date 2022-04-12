@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import useCart from '../../hook/useCart';
 import useProducts from '../../hook/useProducts';
 import { addToDb } from '../../utilities/fakedb';
@@ -36,7 +37,9 @@ const Shop = () => {
                 }
             </div>
             <div className='cart-container'>
-                <Cart cart={cart}></Cart>
+                <Cart cart={cart}><Link to="/orders">
+            <button>Review Orders</button>
+          </Link></Cart>
             </div>
         </section>
     );
