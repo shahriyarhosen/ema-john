@@ -1,12 +1,34 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import './Login.css'
+import React, { useState } from "react";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import auth from "../../Firebase/Firebase.init";
+import "./Login.css";
 
 const Login = () => {
-    const handleUserSignIn = (event) => {
-        event.preventDefault();
-        // signInWithEmailAndPassword(email, password);
-      };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+  let location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+
+  if (user) {
+    navigate(from, { replace: true });
+  }
+
+  const handleEmailValue = (event) => {
+    setEmail(event.target.value);
+  };
+  const handlePasswordValue = (event) => {
+    setPassword(event.target.value);
+  };
+  const handleUserSignIn = (event) => {
+    event.preventDefault();
+    signInWithEmailAndPassword(email, password);
+  };
   return (
     <div className="form-container">
       <div>
@@ -15,7 +37,7 @@ const Login = () => {
           <div className="input-group">
             <label htmlFor="email">Email</label>
             <input
-            //   onBlur={handleEmailValue}
+              onBlur={handleEmailValue}
               type="email"
               name="email"
               id=""
@@ -25,15 +47,15 @@ const Login = () => {
           <div className="input-group">
             <label htmlFor="password">Password</label>
             <input
-            //   onBlur={handlePasswordValue}
+              onBlur={handlePasswordValue}
               type="password"
               password="email"
               id=""
               required
             />
           </div>
-          {/* {loading && <p>Loading...</p>} */}
-          {/* <p>{error?.message}</p> */}
+          {loading && <p>Loading...</p>}
+          <p>{error?.message}</p>
           <input className="form-submit" type="submit" value="Login" />
         </form>
         <p>
