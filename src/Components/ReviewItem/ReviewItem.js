@@ -12,7 +12,7 @@ const ReviewItem = ({ product }) => {
       </div>
       <div className="review-item-details-container ">
         <div className="review-item-details">
-          <p>{name}</p>
+          <p>{name.length > 20 ? name.slice(0, 20) : name}</p>
           <p>
             Price: $<span className="orange-color">{price}</span>
           </p>
